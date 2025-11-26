@@ -14,6 +14,17 @@ class UserController extends AbstractController {
             this.jsonResponse(res, { error: "Erreur serveur" }, 500);
         }
     }
+
+    async register(req, res) {
+        try {
+            const userData = req.body;
+            const newUser = await this.service.register(userData);
+            this.jsonResponse(res, newUser, 201);
+        } catch (err) {
+            console.error(err);
+            this.jsonResponse(res, { error: err.message }, 400);
+        }
+    }
 }
 
 module.exports = new UserController();
