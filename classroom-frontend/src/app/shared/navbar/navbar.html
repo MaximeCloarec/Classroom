@@ -1,0 +1,60 @@
+
+<!-- <nav class="navbar">
+    //A modifier!
+    //desktop
+  <div class="nav-left">
+    <img  src="/brand/Logo_violet.png" alt="Logo">
+    <h2>Classroom</h2>
+  </div>
+
+  <ul class="nav-links">
+    <li><a routerLink="/" routerLinkActive="active">Accueil</a></li>
+    <li><a routerLink="/test1" routerLinkActive="active">Cours</a></li>
+    <li><a routerLink="/tes2" routerLinkActive="active">Étudiants</a></li>
+    <li><a routerLink="/tes3" routerLinkActive="active">Profil</a></li>
+    <li><a routerLink="/tes3" routerLinkActive="active">Profil</a></li>
+    <li><a routerLink="/tes3" routerLinkActive="active">Profil</a></li>
+  </ul>
+
+  //faire mobile
+</nav> -->
+
+
+
+<!-- // A modifier! -->
+<nav class="bg-purple-800 text-white pr-6 flex items-center justify-between">
+  <div class="flex items-center">
+    <img  src="/brand/Logo_violet.png"  alt="Logo" class="h-25 w-25 mx-[-6px] object-contain" />
+    <h2 class="text-xl font-bold">  Classroom</h2>
+  </div>
+  <!-- desk -->
+  <ul class="hidden md:flex space-x-6">
+    <li><a routerLink="/" routerLinkActive="underline" class="">Accueil</a></li>
+    <li><a routerLink="/Gestion admin" routerLinkActive="underline" class="">Cours</a></li>
+    <li><a routerLink="/stagiaires" routerLinkActive=" underline" class="">Étudiants</a></li>
+    <li><a routerLink="/module" routerLinkActive=" underline" class="">module</a></li>
+    <li><a routerLink="/sessions" routerLinkActive="underline" class="">sessions</a></li>
+    <li><a routerLink="/contacte" routerLinkActive=" underline " class="">contacte</a></li>
+    <li *ngIf=""><a routerLink="/inscription" routerLinkActive="underline" class="">inscription</a></li>
+    <li *ngIf=""><a routerLink="/connexion" routerLinkActive="underline" class="">connexion</a></li>
+  </ul>
+
+  <!--  menu Bg  -->
+  
+  <button (click)="toggleMenu()" class="md:hidden focus:outline-none">
+    <img *ngIf="!menuOpen" src="/nav/icons8-menu-100.png" class="h-10 w-10" alt="menu icon">
+    <img  *ngIf="menuOpen" src="/nav/icons8-effacer-100.png" class="h-10 w-10"  alt="close icon">
+  </button>
+</nav>
+
+<!-- Mob-->
+<ul *ngIf="menuOpen" class=" bg-purple-600 text-white md:hidden space-y-4 px-6 py-4">
+    <li class=""><a routerLink="/" routerLinkActive="underline" class=""> Accueil</a></li>
+    <li><a routerLink="/Gestion admin" routerLinkActive="underline" class="">Cours</a></li>
+    <li><a routerLink="/stagiaires" routerLinkActive=" underline" class="">Étudiants</a></li>
+    <li><a routerLink="/module" routerLinkActive=" underline" class="">module</a></li>
+    <li><a routerLink="/sessions" routerLinkActive="underline" class="">sessions</a></li>
+    <li><a routerLink="/contacte" routerLinkActive=" underline " class="">contacte</a></li>
+    <li *ngIf=""><a routerLink="/inscription" routerLinkActive="underline" class="">inscription</a></li>
+    <li *ngIf=""><a routerLink="/connexion" routerLinkActive="underline" class="">connexion</a></li>
+</ul>
