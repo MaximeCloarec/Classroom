@@ -1,0 +1,63 @@
+<!-- <p>dashboard-ad works!</p>
+tests
+<summary>
+  <details>
+    <p>yoyoyo!</p>
+    <img src="https://picsum.photos/seed/picsum/200/300" class="h-20 w-20" alt="">
+  </details>
+</summary> -->
+
+<div class="p-6 ">
+  <h1 class=" text-xl text-center font-bold mb-6 ">- Dashboard Admin -</h1>
+  <div class=" max-w-500 m-auto ">
+    <table class="min-w-full bg-white rounded-lg shadow-xl border">
+      <thead class="bg-purple-900 text-white">
+        <tr>
+          <th class="py-3 px-4 text-left">ID</th>
+          <th class="py-3 px-4 text-left">Nom</th>
+          <th class="py-3 px-4 text-left">Prenom</th>
+          <th class="py-3 px-4 text-left">Email</th>
+          <th class="py-3 px-4 text-left">Role</th>
+          <th class="py-3 px-4 text-center">Actions</th>
+          <!-- <th class="py-3 px-4 text-left">Autre</th> -->
+          <!-- <th class="py-3 px-4 text-left">Autre2</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let user of users; let i = index">
+          <tr class="hover:bg-gray-50 cursor-pointer" (click)="toggleDetails(i)">
+            <td class="py-2 px-4">{{ user.id }}</td>
+            <td class="py-2 px-4">{{ user.name }}</td>
+            <td class="py-2 px-4">{{ user.lastname }}</td>
+            <td class="py-2 px-4 underline">{{ user.email }}</td>
+            <td class="py-2 px-4">{{ user.role }}</td>
+            <td class="flex justify-center my-4 px-4 space-x-2">
+              <button class="mx-2 bg-gray-500  hover:bg-gray-200  text-white px-3 py-1 rounded">edit</button>
+              <button class="mx-2 bg-red-500 hover:bg-red-200 text-white px-3 py-1 rounded"
+                (click)="deleteUser(user.id)">supprimer</button>
+            </td>
+          </tr>
+
+
+          <tr *ngIf="selectedIndex === i" class="shadow-xl  border-r border-l bg-gray-200">
+            <td colspan="6" class="">
+              <div class=" flex flex-wrap items-center border-b ">
+              
+                  <img src={{user.img}}  alt="Avatar" class="rounded-lg p-2 bg-gray-200 h-20 w-20 object-contain border m-2">
+                <div class="  flex flex-col ml-3">
+                  <p>ID: {{user.id}} </p>
+                  <p>Nom: {{user.lastname}}</p>
+                  <p>Prenom: {{user.name}}</p>
+                  <p>Email :{{ user.email }} </p>
+                  <!-- <p>Role: {{ user.role }}</p>s -->
+                  <p><strong>Role: </strong> {{ user.role  }}</p>
+                  <!-- <p><strong>Date de création:</strong> {{ user.createdAt }}</p> -->
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -7,7 +7,7 @@ import { CommonModule  } from '@angular/common';
   standalone: true,
   imports: [RouterLink, RouterLinkActive, CommonModule ],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.css',
+  styleUrls: ['./navbar.css'],
 })
 
 
