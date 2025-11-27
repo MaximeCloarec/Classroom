@@ -21,7 +21,7 @@ class UserRepository extends AbstractRepository {
     async findByEmail(email) {
         const client = await this.getClient();
         try {
-            const query = `SELECT id_users FROM users WHERE email = $1`;
+            const query = `SELECT id_users,firstname,lastname,pseudo,email,password,profile_picture,status FROM users WHERE email = $1`;
             const values = [email];
             const res = await client.query(query, values);
             return res.rows[0];

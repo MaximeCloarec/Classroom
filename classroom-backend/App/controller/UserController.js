@@ -5,6 +5,7 @@ class UserController extends AbstractController {
     constructor() {
         super(UserService);
     }
+
     async getAllUsers(req, res) {
         try {
             const users = await this.service.getAllUsers();
@@ -17,9 +18,22 @@ class UserController extends AbstractController {
 
     async register(req, res) {
         try {
-            const userData = req.body;
-            const newUser = await this.service.register(userData);
+            const newUser = await this.service.register(req.body);
             this.jsonResponse(res, newUser, 201);
+        } catch (err) {
+            console.error(err);
+            this.jsonResponse(res, { error: err.message }, 400);
+        }
+    }
+
+    async login(req, res) {
+        try {
+            console.log(req.body);
+            const loggedUser = await this.service.login(
+                req.body.email,
+                req.body.password
+            );
+            this.jsonResponse(res, loggedUser, 200);
         } catch (err) {
             console.error(err);
             this.jsonResponse(res, { error: err.message }, 400);

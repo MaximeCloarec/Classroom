@@ -1,28 +1,47 @@
 const userRepository = require("../repository/UserRepository");
 const User = require("../Entities/user");
+const bcrypt = require("bcrypt");
 
 class UserService {
     constructor() {
         this.userRepository = userRepository;
     }
+
     async getAllUsers() {
-        return await this.userRepository.findAllUsers();
+        return this.userRepository.findAllUsers();
+    }
+
+    async hashPassword(password) {
+        return bcrypt.hash(password, 10);
     }
 
     async register(userData) {
-        try {
-            const user = new User(userData);
-            await this.userRepository
-                .findByEmail(user.email)
-                .then((existingUser) => {
-                    if (existingUser) {
-                        throw new Error("Email déja utilisé");
-                    }
-                });
-            return await this.userRepository.createUser(user);
-        } catch (err) {
-            throw new Error("Invalid user data: " + err.message);
+        const newUser = new User(userData);
+
+        const existingUser = await this.userRepository.findByEmail(
+            newUser.email
+        );
+        if (existingUser) {
+            throw new Error("Email déjà utilisé");
         }
+
+        const hashedPassword = await this.hashPassword(newUser.password);
+        newUser.password = hashedPassword;
+
+        return this.userRepository.createUser(newUser);
+    }
+
+    async login(email, password) {
+        const user = await this.userRepository.findByEmail(email);
+        if (!user) {
+            throw new Error("Utilisateur non trouvé");
+        }
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            throw new Error("Mot de passe incorrect");
+        }
+        delete user.password;
+        return user;
     }
 }
 
