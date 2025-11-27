@@ -8,11 +8,23 @@ npm install
 
 À la racine du backend :
 ```bash
-PORT=3000
+PGUSER=postgres
+PGHOST=localhost
+PGDATABASE=classroom
+PGPASSWORD=123456
+PGPORT=5432
 ```
-3. Lancer le serveur
+1. Lancer le tout
 
 Depuis le dossier classroom-backend :
+
+Créer la DATABASE (UNIQUEMENT LA PREMIERE FOIS): 
+```bash
+node setup.js
+```
+Vous devrez avoir un message dans votre console pour validation
+
+Lancer le server :
 ```bash
 node server.js
 ```
@@ -156,3 +168,16 @@ module.exports = new UserController();
 ## BONUS
 
 Concernant services et repository rien de nouveau ni d'unique au framework Express
+
+## Comment faire tourner POSTGRE sur laragon ? 
+
+[Les binaries](https://sbp.enterprisedb.com/getfile.jsp?fileid=1259825) 
+Dedans vous devez avoir un dossier pgsql
+
+Vous allez la où vous avez l'exécutable de laragon
+Y'a un dossier bin DANS le dossier bin vous faites un dossier postgresql 
+Dans le dossier postgresql vous mettez le dossier pgsql
+
+Vous avez donc laragon-x.x.x\bin\postgresql\pgsql
+
+Sur laragon vous faites clique droit PostgreSQL -> Démarrer PostgreSQL 

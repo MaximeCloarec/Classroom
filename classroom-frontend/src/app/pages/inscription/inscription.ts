@@ -53,41 +53,38 @@ export class Inscription {
 
     if (this.formData.firstname.trim().length < 2) {
       this.errors.firstname = '* Le prenom doit avoir 2 cractere min.';
-     
+
     }
 
 
     if (this.formData.lastname.trim().length < 3) {
       this.errors.lastname = '* Le nom doit avoir 3 cractere min.';
- 
+
     }
 
 
     if (this.formData.pseudo.trim().length < 3) {
       this.errors.pseudo = '* Le pseudo est obligatoire.';
- 
+
     }
 
 
     if (this.formData.email.trim().length <= 0 || !this.formData.email.includes('@')) {
       this.errors.email = '* Email invalide.';
-     
+
     }
 
 
     if (!this.passwordRegex.test(this.formData.password)) {
-      this.errors.password =
-        '* Le mot de passe doit contenir 8 caracteres min, 1 maj, 1 min, 1 chiffre et 1 caractère spécial.';
-    
-
+      this.errors.password = '* Le mot de passe doit contenir 8 caracteres min, 1 maj, 1 min, 1 chiffre et 1 caractère spécial.';
     }
-      if (this.formData.password !== this.formData.confirmPassword) {
+    if (this.formData.password !== this.formData.confirmPassword) {
       this.errors.password = '* Les mots de passe ne correspondent pas.';
     }
 
     if (this.errors.firstname || this.errors.lastname || this.errors.pseudo || this.errors.email || this.errors.password) {
       return false;
-    }else{
+    } else {
       console.log("FORM GG");
     }
     return true;
@@ -97,12 +94,15 @@ export class Inscription {
   async onSubmit() {
     console.log("donné du form:", this.formData)
     if (!this.validateForm()) {
+
       console.log("erreurs de validation :", this.errors);
       return;
     }
+
+
     try {
-//      const response = await sendUserToBackEnd(this.formData);
-//      console.log("reponse backend :", response);
+      //      const response = await sendUserToBackEnd(this.formData);
+      //      console.log("reponse backend :", response);
     } catch (e) {
       console.error("!! erreur API !!:", e);
     }
