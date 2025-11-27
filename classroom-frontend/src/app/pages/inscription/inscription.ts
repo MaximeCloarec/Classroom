@@ -21,6 +21,11 @@ export class Inscription {
    */
   passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
+  /**
+   * Regex for validating emails
+   */
+ emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   formData = {
     firstname: '',
     lastname: '',
@@ -69,7 +74,7 @@ export class Inscription {
     }
 
 
-    if (this.formData.email.trim().length <= 0 || !this.formData.email.includes('@')) {
+    if (this.formData.email.trim().length <= 0 || !this.emailRegex.test(this.formData.email)) {
       this.errors.email = '* Email invalide.';
 
     }
