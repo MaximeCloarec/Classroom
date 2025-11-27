@@ -3,13 +3,23 @@ class User {
         // this.assertNumber(data.id, "id");
         this.assertString(data.firstname, "firstname");
         this.assertString(data.lastname, "lastname");
-        this.assertString(data.pseudo,"pseudo")
+        this.assertString(data.pseudo, "pseudo");
         this.assertEmail(data.email, "email");
         this.assertString(data.password, "password");
         this.assertOptionalURL(data.imgProfile, "imgProfile");
         this.status = true;
+        this.role = data.role || "stagiaire";
 
         Object.assign(this, data);
+
+        // Faire en sorte que le mot de passe ne soit pas envoyé en front-end
+        if (this.password !== undefined) {
+            Object.defineProperty(this, "password", {
+                enumerable: false,
+                writable: true,
+                configurable: true,
+            });
+        }
     }
 
     assertString(value, field) {
@@ -26,7 +36,8 @@ class User {
 
     assertEmail(value, field) {
         this.assertString(value, field);
-        if (!value.includes("@")) {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailRegex.test(value)) {
             throw new Error(`${field} must be a valid email`);
         }
     }

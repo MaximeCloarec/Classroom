@@ -1,22 +1,27 @@
 require("dotenv").config();
 const { Pool } = require("pg");
+const fs = require("fs");
+const path = require("path");
 
 const dbPool = new Pool();
 
 async function migrate() {
-    // Créer la table si elle n'existe pas
-    await dbPool.query(`
-        CREATE TABLE IF NOT EXISTS users (
-            id_users SERIAL PRIMARY KEY,
-            lastname VARCHAR(50) NOT NULL,
-            firstname VARCHAR(50) NOT NULL,
-            pseudo VARCHAR(50) NOT NULL,
-            email VARCHAR(50) NOT NULL UNIQUE,
-            password VARCHAR(100) NOT NULL,
-            profile_picture VARCHAR(150),
-            status BOOLEAN
+    const sql = fs.readFileSync(path.join(__dirname, "db.sql"), "utf8");
+    await dbPool.query(sql);
+
+    const roleCheck = await dbPool.query(
+        `SELECT * FROM role WHERE name_role = $1`,
+        ["admin"]
+    );
+    if (roleCheck.rows.length === 0) {
+        console.log("Creation des roles...");
+        await dbPool.query(
+            `
+            INSERT INTO role (name_role) VALUES ($1), ($2)
+        `,
+            ["admin", "stagiaire"]
         );
-    `);
+    }
 
     const check = await dbPool.query(`SELECT * FROM users WHERE email = $1`, [
         "Tibo@gmail.com",
@@ -27,8 +32,8 @@ async function migrate() {
         await dbPool.query(
             `
             INSERT INTO users 
-            (lastname, firstname, pseudo, email, password, profile_picture, status)
-            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            (lastname, firstname, pseudo, email, password, profile_picture, status,id_role)
+            VALUES ($1, $2, $3, $4, $5, $6, $7,$8)
         `,
             [
                 "Tibo",
@@ -38,6 +43,7 @@ async function migrate() {
                 "123456",
                 "https://example.com/pic1.jpg",
                 true,
+                1,
             ]
         );
     } else {

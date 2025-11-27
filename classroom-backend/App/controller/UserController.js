@@ -19,6 +19,8 @@ class UserController extends AbstractController {
     async register(req, res) {
         try {
             const newUser = await this.service.register(req.body);
+            console.log(newUser);
+
             this.jsonResponse(res, newUser, 201);
         } catch (err) {
             console.error(err);
@@ -41,7 +43,12 @@ class UserController extends AbstractController {
 
     async deleteUser(req, res) {
         try {
-            const result = await this.service.deleteUser(req.body.email);
+            console.log(req.body);
+            
+            const result = await this.service.deleteUser(
+                req.body.emailSuppressor,
+                req.body.emailToDelete
+            );
             this.jsonResponse(
                 res,
                 { message: "Utilisateur supprimé avec succès" },
