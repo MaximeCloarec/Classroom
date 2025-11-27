@@ -28,12 +28,25 @@ class UserController extends AbstractController {
 
     async login(req, res) {
         try {
-            console.log(req.body);
             const loggedUser = await this.service.login(
                 req.body.email,
                 req.body.password
             );
             this.jsonResponse(res, loggedUser, 200);
+        } catch (err) {
+            console.error(err);
+            this.jsonResponse(res, { error: err.message }, 400);
+        }
+    }
+
+    async deleteUser(req, res) {
+        try {
+            const result = await this.service.deleteUser(req.body.email);
+            this.jsonResponse(
+                res,
+                { message: "Utilisateur supprimé avec succès" },
+                200
+            );
         } catch (err) {
             console.error(err);
             this.jsonResponse(res, { error: err.message }, 400);

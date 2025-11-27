@@ -58,6 +58,20 @@ class UserRepository extends AbstractRepository {
             client.release();
         }
     }
+
+    async deleteUser(id) {
+        const client = await this.getClient();
+        try {
+            const query = `DELETE FROM users WHERE id_users = $1`;
+            const values = [id];
+            await client.query(query, values);
+        } catch (err) {
+            console.error("Erreur de requête", err.stack);
+            throw err;
+        } finally {
+            client.release();
+        }
+    }
 }
 
 module.exports = new UserRepository();

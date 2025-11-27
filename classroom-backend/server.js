@@ -1,9 +1,8 @@
-require("dotenv").config({ path: __dirname + "/.env" });
 const http = require("node:http");
 const app = require("./app");
 const { migrate } = require("./App/db");
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 const server = http.createServer(app);
 

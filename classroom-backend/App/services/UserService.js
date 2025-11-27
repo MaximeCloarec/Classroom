@@ -43,6 +43,14 @@ class UserService {
         delete user.password;
         return user;
     }
+
+    async deleteUser(email) {
+        const user = await this.userRepository.findByEmail(email);
+        if (!user) {
+            throw new Error("Utilisateur non trouvé");
+        }
+        return this.userRepository.deleteUser(user.id_users);
+    }
 }
 
 module.exports = new UserService();
