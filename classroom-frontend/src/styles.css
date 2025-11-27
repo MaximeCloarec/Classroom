@@ -19,6 +19,19 @@
     box-shadow: 0 4px 6px #46197d;
 }
 
+.sousTitre{
+    font-family: 'Saira Stencil One', cursive;
+    font-size: 1.8rem;
+    text-align: center;
+    padding: 2vh 1vw 2vh 1vw;
+}
+
+.bloc_sous-titre{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .contenu{
     font-family: 'Overpass', sans-serif;
     font-size: 1.2rem;
@@ -27,4 +40,23 @@
     margin: 2vh;
     border: solid 3px #892ce5;
     border-radius: 20px;
+}
+
+.info_user{
+    font-family: 'Overpass', sans-serif;
+    font-size: 1.2rem;
+}
+
+.input{
+    border: solid 1px #000000;
+    margin-left: 1vw;
+    padding-left: 0.5%;
+    max-width: 13vw;
+    width:100%;
+}
+@media (max-width: 480px) {
+    .input{
+        max-width: 50vw;
+        width:100%;
+    }
 }
