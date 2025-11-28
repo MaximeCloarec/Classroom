@@ -43,9 +43,7 @@ class UserController extends AbstractController {
 
     async deleteUser(req, res) {
         try {
-            console.log(req.body);
-            
-            const result = await this.service.deleteUser(
+            const res = await this.service.deleteUser(
                 req.body.emailSuppressor,
                 req.body.emailToDelete
             );
@@ -56,6 +54,15 @@ class UserController extends AbstractController {
             );
         } catch (err) {
             console.error(err);
+            this.jsonResponse(res, { error: err.message }, 400);
+        }
+    }
+
+    async modifyUser(req, res) {
+        try {
+            const res = await this.service.modifyUser(req.body);
+        } catch (err) {
+            console.log(err);
             this.jsonResponse(res, { error: err.message }, 400);
         }
     }

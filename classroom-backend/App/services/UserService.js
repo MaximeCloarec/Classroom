@@ -1,5 +1,6 @@
 const userRepository = require("../repository/UserRepository");
 const User = require("../Entities/user");
+const Admin = require("../Entities/Admin");
 const bcrypt = require("bcrypt");
 
 class UserService {
@@ -18,7 +19,7 @@ class UserService {
     async register(userData) {
         const newUser = new User(userData);
 
-        const existingUser = await this.userRepository.findByEmail(
+        const existingUser = await this.userRepository.findUserByEmail(
             newUser.email
         );
         if (existingUser) {
@@ -28,11 +29,11 @@ class UserService {
         const hashedPassword = await this.hashPassword(newUser.password);
         newUser.password = hashedPassword;
         newUser.role = "stagiaire";
-        return this.userRepository.createUser(newUser);
+        return this.userRepository.saveUser(newUser);
     }
 
     async login(email, password) {
-        const user = await this.userRepository.findByEmail(email);
+        const user = await this.userRepository.findUserByEmail(email);
         if (!user) {
             throw new Error("Utilisateur non trouvé");
         }
@@ -45,22 +46,32 @@ class UserService {
     }
 
     async deleteUser(emailSuppressor, emailToDelete) {
-        console.log(emailSuppressor,emailToDelete);
-        
-        const suppressor = await this.userRepository.findByEmail(
+        const adminData = await this.userRepository.findUserByEmail(
             emailSuppressor
         );
-        console.log(suppressor);
-        if (!suppressor || suppressor.name_role !== "admin") {
-            throw new Error(
-                "Permission refusée : seul un admin peut supprimer un utilisateur"
-            );
+        if (!adminData) {
+            throw new Error("Utilisateur admin non trouvé");
         }
-        const user = await this.userRepository.findByEmail(emailToDelete);
-        if (!user) {
-            throw new Error("Utilisateur non trouvé");
+        const admin = new Admin(adminData);
+        const userToDelete = await this.userRepository.findUserByEmail(
+            emailToDelete
+        );
+        if (!userToDelete) {
+            throw new Error("Utilisateur à supprimer non trouvé");
         }
-        return this.userRepository.deleteUser(user.id_users);
+        return admin.deleteAccount(this.admin.email, emailToDelete);
+    }
+
+    async modifiyUser(newData) {
+        const modifiedUser = new User(newData);
+
+        const existingUser = await this.userRepository.findUserByEmail(
+            modifiedUser.email
+        );
+        if (existingUser) {
+            throw new Error("Le compte n'existe pas");
+        }
+        return this.userRepository.updateUser(modifiedUser);
     }
 }
 

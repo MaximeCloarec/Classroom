@@ -20,7 +20,7 @@ class UserRepository extends AbstractRepository {
         }
     }
 
-    async findByEmail(email) {
+    async findUserByEmail(email) {
         const client = await this.getClient();
         try {
             const query = `SELECT id_users,firstname,lastname,pseudo,email,password,profile_picture,status,name_role FROM users JOIN role ON users.id_role = role.id_role WHERE email = $1`;
@@ -35,7 +35,40 @@ class UserRepository extends AbstractRepository {
         }
     }
 
-    async createUser(user) {
+    async isUserExistsByEmail(email) {
+        const client = await this.getClient();
+        try {
+            const query = `SELECT id_users FROM users WHERE email = $1 `;
+            const values = [email];
+            const res = await client.query(query, values);
+            if (res.rows.length > 0) {
+                return true;
+            }
+            return false;
+        } catch (err) {
+            console.error("Erreur de requête", err.stack);
+            throw err;
+        } finally {
+            client.release();
+        }
+    }
+
+    async findAllByRole(role) {
+        const client = await this.getClient();
+        try {
+            const query = `SELECT firstname,lastname,pseudo,email,profile_picture,status,name_role FROM users JOIN role ON users.id_role = role.id_role WHERE role = $1`;
+            const values = [role];
+            const res = await client.query(query, values);
+            return res.rows[0];
+        } catch (err) {
+            console.error("Erreur de requête", err.stack);
+            throw err;
+        } finally {
+            client.release();
+        }
+    }
+
+    async saveUser(user) {
         const client = await this.getClient();
         try {
             const query = `
@@ -89,6 +122,24 @@ class UserRepository extends AbstractRepository {
             throw err;
         } finally {
             client.release();
+        }
+    }
+
+    async modifyUser(user) {
+        const client = await this.getClient();
+        try {
+            const query = `UPDATE USERS SET lastname=$1,firstname=$2,pseudo=$3,email=$4,profile_picture=$5`;
+            const values = [
+                user.lastname,
+                user.firstname,
+                user.pseudo,
+                user.pseudo,
+                user.email,
+                user.imgProfile,
+            ];
+            await client.query(query, values);
+        } catch (err) {
+            console.error("Erreur de requête", err.stack);
         }
     }
 }
