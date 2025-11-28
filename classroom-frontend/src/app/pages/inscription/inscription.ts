@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-//import { sendUserToBackEnd } from '../../services/user.service';
-
+import { sendUserToBackEnd } from '../../services/userService';
 @Component({
   selector: 'app-inscription',
   imports: [CommonModule, FormsModule],
@@ -107,8 +106,8 @@ export class Inscription {
 
 
     try {
-      //      const response = await sendUserToBackEnd(this.formData);
-      //      console.log("reponse backend :", response);
+           const response = await sendUserToBackEnd(this.formData);
+           console.log("reponse backend :", response);
     } catch (e) {
       console.error("!! erreur API !!:", e);
     }

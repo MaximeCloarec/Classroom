@@ -6,26 +6,26 @@
 
   <div class="overflow-x-auto">
     <div class="min-w-full max-w-500 m-auto">
-      <table class="min-w-full bg-white rounded-lg shadow-xl border ">
+      <table class="min-w-full bg-white rounded-lg shadow-xl border">
         <thead class="bg-purple-900 text-white">
           <tr>
-            <th class="py-2 px-2 md:px-3 text-left">Id</th>
-            <th class="py-2 px-2 md:px-3 text-left">Nom</th>
-            <th class="py-2 px-2 md:px-3 text-left">Prenom</th>
-            <th class="py-2 px-2 md:px-3 text-left hidden sm:table-cell">Email</th>
-            <th class="py-2 px-2 md:px-3 text-left">Role</th>
-            <th class="py-2 px-2 md:px-3"></th>
+            <th class="py-3 px-2 md:px-4 text-left">Id</th>
+            <th class="py-3 px-2 md:px-4 text-left">Nom</th>
+            <th class="py-3 px-2 md:px-4 text-left">Prenom</th>
+            <th class="py-3 px-2 md:px-4 text-left hidden sm:table-cell">Email</th>
+            <th class="py-3 px-2 md:px-4 text-left">Role</th>
+            <th class="py-3 px-2 md:px-4"></th>
           </tr>
         </thead>
-        <tbody >
+        <tbody>
           <ng-container *ngFor="let user of users; let i = index">
-            <tr class="ligne_user_globale cursor-pointer" (click)="toggleDetails(i)">
-              <td class="py-2 px-2 md:px-3">{{ user.id }}</td>
-              <td class="py-2 px-2 md:px-3">{{ user.name }}</td>
-              <td class="py-2 px-2 md:px-3">{{ user.lastname }}</td>
-              <td class="py-2 px-2 md:px-3 underline hidden sm:table-cell">{{ user.email }}</td>
-              <td class="py-2 px-2 md:px-3">{{ user.role }}</td>
-              <td class="py-2 px-2 md:px-3"></td>
+            <tr class="hover:bg-gray-50 cursor-pointer" (click)="toggleDetails(i)">
+              <td class="py-2 px-2 md:px-4">{{ user.id_users }}</td>
+              <td class="py-2 px-2 md:px-4">{{ user.firstname }}</td>
+              <td class="py-2 px-2 md:px-4">{{ user.lastname }}</td>
+              <td class="py-2 px-2 md:px-4 underline hidden sm:table-cell">{{ user.email }}</td>
+              <!-- <td class="py-2 px-2 md:px-4">{{ user.role }}</td> -->
+              <td class="py-2 px-2 md:px-4"></td>
             </tr>
 
             <tr *ngIf="selectedIndex === i" class="shadow-xl border-r border-l bg-gray-200">
@@ -33,7 +33,7 @@
                 <div class="flex flex-col md:flex-row items-start justify-between gap-4">
                   <div class="flex-1 w-full">
                     <div class="flex flex-col text-sm md:text-base space-y-2 mb-4">
-                      <p class="info_user">ID: {{user.id}}</p>
+                      <p class="info_user">ID: {{user.id_users}}</p>
 
                       <div class="ligne_user flex">
                         <p class="info_user w-20">Nom </p>
@@ -42,39 +42,36 @@
 
                       <div class="ligne_user flex">
                         <p class="info_user w-20">Prénom </p>
-                        <input type="text" class="input flex-1" value="{{user.name}}">
+                        <input type="text" class="input flex-1" value="{{user.firstname}}">
                       </div>
 
                       <div class="ligne_user flex">
-                        <p class="info_user w-20">Email </p>
+                        <p class="info_user w-20">Emai </p>
                         <input type="text" class="input flex-1" value="{{ user.email }}">
                       </div>
 
                       <div class="ligne_user flex">
                         <p class="info_user w-20">Role </p>
-                        <input type="text" class="input flex-1" value="{{ user.role }}">
+                        <!-- <input type="text" class="input flex-1" value="{{ user.role }}"> -->
                       </div>
                     </div>
 
-                    <div class="flex-shrink-0">
-                    <img src={{user.img}} alt="Avatar" id="image_user">
-                  </div>
-                  
                     <div class="flex space-x-2">
-
-                      <button class="boutton_violet">
-                        Modifier Photo
-                      </button>
-
-                      <button class="boutton_violet">
+                      <button
+                        class="boutton_enregistrer">
                         Enregistrer
                       </button>
-
-                      <button class="boutton_supprimer" (click)="$event.stopPropagation(); deleteUser(user.id)">
+                      <button
+                        class="boutton_supprimer"
+                        (click)="$event.stopPropagation(); deleteUser(user.id_users)">
                         Supprimer
-                      </button>  
+                      </button>
                     </div>
+                  </div>
 
+                  <div class="flex-shrink-0">
+                    <img src={{user.profile_picture}} alt="Avatar"
+                      id="image_user">
                   </div>
                 </div>
               </td>
