@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-//import { getAllUsers } from '../../services/user.service';
+import { getAllUsers } from '../../services/userService';
+import { ChangeDetectorRef } from '@angular/core';
 
-interface User {
-  id: number;
-  name: string;
+
+
+export interface User {
+  id_users: number;
   lastname: string;
+  firstname: string;
+  pseudo: string;
   email: string;
-  img?: string;
-  role: string
+  profile_picture?: string;
+  status?: boolean;
 }
 
 @Component({
@@ -20,35 +24,40 @@ interface User {
 })
 export class DashboardAd {
 
-  // users: User[] = [];
+  constructor(private cdr: ChangeDetectorRef) { }
+  users: User[] = [];
 
-  // async getUser() {
-  //   this.users = await getAllUsers();
+  async getUser() {
+    try {
+      this.users = await getAllUsers();
+      console.log("users", this.users)
+      this.cdr.detectChanges();
+    } catch (e: any) {
+      console.error("Erreur lors de la récupération des utilisateurs :", e);
+    }
+  }
 
-  // }
-  
-  // async ngOnInit() {
-  //   await this.loadUsers();
-  // }
+  async ngOnInit() {
+    await this.getUser();
 
-  // async loadUsers() {
-  //   this.users = await getAllUsers();
-  // }
+  }
+
+
   selectedIndex: number | null = null;
   toggleDetails(index: number) {
     this.selectedIndex = this.selectedIndex === index ? null : index;
   }
 
   deleteUser(id: number) {
-    this.users = this.users.filter(u => u.id !== id);
+    this.users = this.users.filter(u => u.id_users !== id);
   }
 
   //test
-  users: User[] = [
-    { id: 1, name: "max", lastname: ' Dupont',img:'avatar/placeholderAvatar.png', email: 'max@example.com', role: 'Admin' },
-    { id: 2, name: "gomar", lastname: ' pudont',img:'avatar/placeholderAvatar.png', email: 'gomar@example.com', role: "stagi" },
-    { id: 3, name: 'thom ', lastname: ' Donput',img:'avatar/placeholderAvatar.png', email: 'thom@example.com', role: 'stagi' },
-    { id: 4, name: 'luc ', lastname: ' Tudonp',img:'avatar/placeholderAvatar.png', email: "luc@example.com", role: 'stagi' }
-  ]
+  // users: User[] = [
+  //   { id: 1, name: "max", lastname: ' Dupont', img: 'avatar/placeholderAvatar.png', email: 'max@example.com', role: 'Admin' },
+  //   { id: 2, name: "gomar", lastname: ' pudont', img: 'avatar/placeholderAvatar.png', email: 'gomar@example.com', role: "stagi" },
+  //   { id: 3, name: 'thom ', lastname: ' Donput', img: 'avatar/placeholderAvatar.png', email: 'thom@example.com', role: 'stagi' },
+  //   { id: 4, name: 'luc ', lastname: ' Tudonp', img: 'avatar/placeholderAvatar.png', email: "luc@example.com", role: 'stagi' }
+  // ]
 
 }
