@@ -1,5 +1,23 @@
+.ligne_user_globale{
+    border:solid #892ce5 1px;
+    font-family:'Overpass', sans-serif;
+}
+
 .ligne_user{
     display: flex;
+}
+
+.info_user{
+    font-family: 'Overpass', sans-serif;
+    font-size: 1.2rem;
+}
+
+.input{
+    border: solid 1px #000000;
+    margin-left: 1vw;
+    padding-left: 0.5%;
+    max-width: 13vw;
+    width:100%;
 }
 
 #image_user{
@@ -7,6 +25,7 @@
     border: solid 3px #892ce5;
     border-radius: 10px;
     padding: 1vw;
+    margin: 2vw;
 }
 
 @media (max-width: 480px) {
@@ -15,7 +34,7 @@
     }
 }
 
-.boutton_enregistrer{
+.boutton_violet{
     font-family: 'Overpass', sans-serif;
     color: white;
     background-color: #892ce5;
@@ -23,7 +42,7 @@
     border-radius: 20px;
     padding: 0.5vh 3vw 0.5vh 3vw;
 }
-.boutton_enregistrer:hover{
+.boutton_violet:hover{
     font-family: 'Overpass', sans-serif;
     color: #892ce5;
     background-color: white;

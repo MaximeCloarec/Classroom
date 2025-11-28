@@ -1,9 +1,10 @@
 const express = require("express");
+const cors = require("cors")
 
 // Routes import
 const userRoutes = require("./App/routes/userRoutes.js");
-
 const app = express();
+app.use(cors());
 
 // Middlewares globaux
 app.use(express.json());
