@@ -4,10 +4,6 @@
 
 <!-- // A modifier! -->
 <nav class="bg-purple-800 text-white pr-6 flex items-center justify-between">
-  <div class="flex items-center">
-    <img  src="/brand/Logo_violet.png"  alt="Logo" class="h-25 w-25 mx-[-6px] object-contain" />
-    <h2 class="text-xl font-bold">  Classroom</h2>
-  </div>
   <!-- desk -->
   <ul class="hidden md:flex space-x-6">
     <li><a routerLink="/" routerLinkActive="underline" class="">Accueil</a></li>
@@ -19,6 +15,10 @@
     <li ><a routerLink="/inscription" routerLinkActive="underline" class="">inscription</a></li>
     <li *ngIf=""><a routerLink="/connexion" routerLinkActive="underline" class="">connexion</a></li>
   </ul>
+  <div class="flex items-center">
+    <img  src="/brand/Logo_violet.png"  alt="Logo" class="h-25 w-25 mx-[-6px] object-contain" />
+    <h2 class="text-xl font-bold">  Classroom</h2>
+  </div>
 
   <!--  menu Bg  -->
   
