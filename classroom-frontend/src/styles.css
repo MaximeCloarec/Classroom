@@ -13,17 +13,19 @@ body{
     box-shadow: 0px 0px 10px 3px rgba(144, 100, 248, 0.628);
 }
 
-.titre{
-    font-family: 'Saira Stencil One', cursive;
-    font-size: 2.5rem;
-    text-align: center;
-    padding: 2vh;
-    margin: 2vh;
-    border: solid 3px #892ce5;
-    border-radius: 20px;
-    box-shadow: 0 4px 6px #46197d;
+/* cecis est la classe pour les titre des modules dans le header */
+.titre_module{
+    color: black;
+    /* ici on met le titre du module dans le header tu peut suprimer le contenu */
 }
 
+
+/* sous titre et bloc sous titre sous les titre des partie cours ou autre (haut de page) */
+.bloc_sous-titre{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .sousTitre{
     font-family: 'Saira Stencil One', cursive;
     font-size: 1.8rem;
@@ -31,12 +33,7 @@ body{
     padding: 2vh 1vw 2vh 1vw;
 }
 
-.bloc_sous-titre{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
+/* tout le contenue texte des lecons avec petit encadrer */
 .contenu{
     font-family: 'Overpass', sans-serif;
     font-size: 1.2rem;
@@ -53,18 +50,9 @@ body{
     border-color: #8a2be2;
 }
 
-.info_user{
-    font-family: 'Overpass', sans-serif;
-    font-size: 1.2rem;
-}
 
-.input{
-    border: solid 1px #000000;
-    margin-left: 1vw;
-    padding-left: 0.5%;
-    max-width: 13vw;
-    width:100%;
-}
+
+
 @media (max-width: 480px) {
     .input{
         max-width: 50vw;
