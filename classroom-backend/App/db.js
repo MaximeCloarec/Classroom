@@ -41,7 +41,7 @@ async function migrate() {
                 "TiboobiT",
                 "Tibo@gmail.com",
                 "123456",
-                "https://example.com/pic1.jpg",
+                "avatar/placeholderAvatar.png",
                 true,
                 1,
             ]
