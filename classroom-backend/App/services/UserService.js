@@ -27,7 +27,7 @@ class UserService {
 
         const hashedPassword = await this.hashPassword(newUser.password);
         newUser.password = hashedPassword;
-
+        newUser.role = "stagiaire";
         return this.userRepository.createUser(newUser);
     }
 
@@ -40,12 +40,23 @@ class UserService {
         if (!isPasswordValid) {
             throw new Error("Mot de passe incorrect");
         }
-        delete user.password;
-        return user;
+        const loggedUser = new User(user);
+        return loggedUser;
     }
 
-    async deleteUser(email) {
-        const user = await this.userRepository.findByEmail(email);
+    async deleteUser(emailSuppressor, emailToDelete) {
+        console.log(emailSuppressor,emailToDelete);
+        
+        const suppressor = await this.userRepository.findByEmail(
+            emailSuppressor
+        );
+        console.log(suppressor);
+        if (!suppressor || suppressor.name_role !== "admin") {
+            throw new Error(
+                "Permission refusée : seul un admin peut supprimer un utilisateur"
+            );
+        }
+        const user = await this.userRepository.findByEmail(emailToDelete);
         if (!user) {
             throw new Error("Utilisateur non trouvé");
         }

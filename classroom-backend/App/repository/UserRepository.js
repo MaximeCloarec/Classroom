@@ -9,7 +9,9 @@ class UserRepository extends AbstractRepository {
         const client = await this.getClient(); // Initalise un client de connexion
 
         try {
-            const res = await client.query("SELECT * FROM users");
+            const res = await client.query(
+                "SELECT id_users,firstname,lastname,pseudo,email,password,profile_picture,status,name_role FROM users JOIN role ON users.id_role = role.id_role"
+            );
             return res.rows;
         } catch (err) {
             console.error("Erreur de requête", err.stack);
@@ -21,7 +23,7 @@ class UserRepository extends AbstractRepository {
     async findByEmail(email) {
         const client = await this.getClient();
         try {
-            const query = `SELECT id_users,firstname,lastname,pseudo,email,password,profile_picture,status FROM users WHERE email = $1`;
+            const query = `SELECT id_users,firstname,lastname,pseudo,email,password,profile_picture,status,name_role FROM users JOIN role ON users.id_role = role.id_role WHERE email = $1`;
             const values = [email];
             const res = await client.query(query, values);
             return res.rows[0];
@@ -37,9 +39,25 @@ class UserRepository extends AbstractRepository {
         const client = await this.getClient();
         try {
             const query = `
-                INSERT INTO users (firstname, lastname, pseudo, email, password, profile_picture, status)
-                VALUES ($1, $2, $3, $4, $5, $6, $7)
-                RETURNING *`;
+            WITH inserted AS (
+                INSERT INTO users (firstname, lastname, pseudo, email, password, profile_picture, status, id_role)
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+                RETURNING *
+            )
+            SELECT 
+                inserted.id_users,
+                inserted.firstname,
+                inserted.lastname,
+                inserted.pseudo,
+                inserted.email,
+                inserted.password,
+                inserted.profile_picture,
+                inserted.status,
+                role.name_role
+            FROM inserted
+            JOIN role ON inserted.id_role = role.id_role;
+        `;
+
             const values = [
                 user.firstname,
                 user.lastname,
@@ -48,6 +66,7 @@ class UserRepository extends AbstractRepository {
                 user.password,
                 user.imgProfile,
                 user.status,
+                user.role === "admin" ? 1 : 2,
             ];
             const res = await client.query(query, values);
             return res.rows[0];
