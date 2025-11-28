@@ -1,0 +1,47 @@
+.ligne_user{
+    display: flex;
+}
+
+#image_user{
+    width: 10vw;
+    border: solid 3px #892ce5;
+    border-radius: 10px;
+    padding: 1vw;
+}
+
+@media (max-width: 480px) {
+    #image_user{
+        width:30vw;
+    }
+}
+
+.boutton_enregistrer{
+    font-family: 'Overpass', sans-serif;
+    color: white;
+    background-color: #892ce5;
+    border: solid white 2px;
+    border-radius: 20px;
+    padding: 0.5vh 3vw 0.5vh 3vw;
+}
+.boutton_enregistrer:hover{
+    font-family: 'Overpass', sans-serif;
+    color: #892ce5;
+    background-color: white;
+    border: solid #892ce5 2px;
+    box-shadow: 0px 0px 10px #892ce5;
+}
+
+.boutton_supprimer{
+    font-family: 'Overpass', sans-serif;
+    color: white;
+    background-color: red;
+    border-radius: 20px;
+    padding: 0.5vh 3vw 0.5vh 3vw;
+}
+.boutton_supprimer:hover{
+    font-family: 'Overpass', sans-serif;
+    color:red;
+    background-color: white;
+    border: solid red 2px;
+    box-shadow: 0px 0px 10px red;
+}

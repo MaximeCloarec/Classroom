@@ -1,0 +1,84 @@
+<div class="p-4 md:p-6">
+  <div class="bloc_sous-titre">
+    <h1 class="sousTitre">Sessions CDA 2025</h1>
+    <img src="/brand/Logo_violet.png" alt="Logo" class="h-25 w-25 mx-[-6px] object-contain" />
+  </div>
+
+  <div class="overflow-x-auto">
+    <div class="min-w-full max-w-500 m-auto">
+      <table class="min-w-full bg-white rounded-lg shadow-xl border">
+        <thead class="bg-purple-900 text-white">
+          <tr>
+            <th class="py-3 px-2 md:px-4 text-left">Id</th>
+            <th class="py-3 px-2 md:px-4 text-left">Nom</th>
+            <th class="py-3 px-2 md:px-4 text-left">Prenom</th>
+            <th class="py-3 px-2 md:px-4 text-left hidden sm:table-cell">Email</th>
+            <th class="py-3 px-2 md:px-4 text-left">Role</th>
+            <th class="py-3 px-2 md:px-4"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let user of users; let i = index">
+            <tr class="hover:bg-gray-50 cursor-pointer" (click)="toggleDetails(i)">
+              <td class="py-2 px-2 md:px-4">{{ user.id }}</td>
+              <td class="py-2 px-2 md:px-4">{{ user.name }}</td>
+              <td class="py-2 px-2 md:px-4">{{ user.lastname }}</td>
+              <td class="py-2 px-2 md:px-4 underline hidden sm:table-cell">{{ user.email }}</td>
+              <td class="py-2 px-2 md:px-4">{{ user.role }}</td>
+              <td class="py-2 px-2 md:px-4"></td>
+            </tr>
+
+            <tr *ngIf="selectedIndex === i" class="shadow-xl border-r border-l bg-gray-200">
+              <td colspan="6" class="p-4">
+                <div class="flex flex-col md:flex-row items-start justify-between gap-4">
+                  <div class="flex-1 w-full">
+                    <div class="flex flex-col text-sm md:text-base space-y-2 mb-4">
+                      <p class="info_user">ID: {{user.id}}</p>
+
+                      <div class="ligne_user flex">
+                        <p class="info_user w-20">Nom </p>
+                        <input type="text" class="input flex-1" value="{{user.lastname}}">
+                      </div>
+
+                      <div class="ligne_user flex">
+                        <p class="info_user w-20">Prénom </p>
+                        <input type="text" class="input flex-1" value="{{user.name}}">
+                      </div>
+
+                      <div class="ligne_user flex">
+                        <p class="info_user w-20">Emai </p>
+                        <input type="text" class="input flex-1" value="{{ user.email }}">
+                      </div>
+
+                      <div class="ligne_user flex">
+                        <p class="info_user w-20">Role </p>
+                        <input type="text" class="input flex-1" value="{{ user.role }}">
+                      </div>
+                    </div>
+
+                    <div class="flex space-x-2">
+                      <button
+                        class="boutton_enregistrer">
+                        Enregistrer
+                      </button>
+                      <button
+                        class="boutton_supprimer"
+                        (click)="$event.stopPropagation(); deleteUser(user.id)">
+                        Supprimer
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="flex-shrink-0">
+                    <img src={{user.img}} alt="Avatar"
+                      id="image_user">
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
