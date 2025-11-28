@@ -1,6 +1,3 @@
-
-
-
 .ligne_user_globale{
     border:solid #892ce5 1px;
     font-family:'Overpass', sans-serif;
@@ -8,6 +5,19 @@
 
 .ligne_user{
     display: flex;
+}
+
+.info_user{
+    font-family: 'Overpass', sans-serif;
+    font-size: 1.2rem;
+}
+
+.input{
+    border: solid 1px #000000;
+    margin-left: 1vw;
+    padding-left: 0.5%;
+    max-width: 13vw;
+    width:100%;
 }
 
 #image_user{

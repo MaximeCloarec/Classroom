@@ -19,7 +19,7 @@
         </thead>
         <tbody >
           <ng-container *ngFor="let user of users; let i = index">
-            <tr class="ligne_user_globale" (click)="toggleDetails(i)">
+            <tr class="ligne_user_globale cursor-pointer" (click)="toggleDetails(i)">
               <td class="py-2 px-2 md:px-3">{{ user.id }}</td>
               <td class="py-2 px-2 md:px-3">{{ user.name }}</td>
               <td class="py-2 px-2 md:px-3">{{ user.lastname }}</td>

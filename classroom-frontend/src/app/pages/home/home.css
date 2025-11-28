@@ -16,6 +16,18 @@ main img {
 
 }
 
+/* cecis est la classe pour les titre de la page  */
+.titre{
+    font-family: 'Saira Stencil One', cursive;
+    font-size: 2.5rem;
+    text-align: center;
+    padding: 2vh;
+    margin: 2vh;
+    border: solid 3px #892ce5;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px #46197d;
+}
+
 #bloc_formation {
     display: flex;
 }
