@@ -77,3 +77,31 @@ export async function getUserById(userId: string | number) {
     }
 }
 
+/**
+ * supprimer un utilisateur par son id
+ * @param {string|number} userId
+ * @returns {Promise<Object>} réponse du serveur
+ */
+export async function deleteUser(emailSuppressor: string, emailToDelete: string) {
+    try {
+        const response = await fetch(`${BASE_URL}delete`, { 
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ emailSuppressor, emailToDelete })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || "Erreur serveur lors de la tentative de suppression")
+        }
+
+        return await response.json();
+
+
+    } catch (e) {
+        throw e;
+    }
+}
+

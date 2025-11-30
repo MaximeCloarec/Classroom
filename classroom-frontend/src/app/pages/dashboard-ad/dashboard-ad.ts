@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { getAllUsers } from '../../services/userService';
 import { ChangeDetectorRef } from '@angular/core';
+import { deleteUser } from '../../services/userService';
 
 
 
@@ -48,8 +49,24 @@ export class DashboardAd {
     this.selectedIndex = this.selectedIndex === index ? null : index;
   }
 
-  deleteUser(id: number) {
-    this.users = this.users.filter(u => u.id_users !== id);
+  async deleteUser(user: User) {
+    try {
+      const emailSuppressor = localStorage.getItem('adminEmail')
+      if (!emailSuppressor) {
+        console.log("Email de l'admin introuvé dans localStorage")
+        return;
+      }
+      const emailToDelete = user.email
+      await deleteUser(emailSuppressor, emailToDelete);
+
+      // met a jour la liste coté front!
+      this.users = this.users.filter(u => u.id_users !== user.id_users)
+      console.log("Utilisateur supprimé ! front & back !")
+
+    } catch (err) {
+      console.error("Erreur lors de la suppression --> log Front :", err);
+    }
+
   }
 
   //test
