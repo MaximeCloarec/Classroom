@@ -23,7 +23,7 @@ export class Inscription {
   /**
    * Regex for validating emails
    */
- emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   formData = {
     firstname: '',
@@ -42,7 +42,7 @@ export class Inscription {
     email: '',
     password: ''
   };
-  
+
   resetErrors() {
     this.errors = {
       firstname: '',
@@ -106,8 +106,8 @@ export class Inscription {
 
 
     try {
-           const response = await sendUserToBackEnd(this.formData);
-           console.log("reponse backend :", response);
+      const response = await sendUserToBackEnd(this.formData);
+      console.log("reponse backend :", response);
     } catch (e) {
       console.error("!! erreur API !!:", e);
     }

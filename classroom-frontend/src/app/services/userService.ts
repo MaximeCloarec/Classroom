@@ -7,7 +7,7 @@ const BASE_URL = "http://localhost:3000/api/users/";
  */
 export async function sendUserToBackEnd(userData:any) {
     try {
-        const response = await fetch(`${BASE_URL}/register`, {
+        const response = await fetch(`${BASE_URL}register`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -52,3 +52,28 @@ export async function getAllUsers() {
         throw e;
     }
 }
+
+/**
+ * Récuperer un utilisateur par id
+ * @param {string|number} userId
+ * @returns {Promise<Object>}(l'utilisateur)
+ */
+export async function getUserById(userId: string | number) {
+    try {
+        const response = await fetch(`${BASE_URL}${userId}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+        });
+        if (!response.ok) {
+            const errorData = await response.json()
+            throw new Error( errorData.error || "Erreur du serveur")
+        }
+        return await response.json();
+
+    } catch (e) {
+        throw e;
+    }
+}
+
