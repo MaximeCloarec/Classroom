@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { sendUserToBackEnd } from '../../services/userService';
+import { passwordRegex, emailRegex } from '../../Utils/regex';
 @Component({
   selector: 'app-inscription',
   imports: [CommonModule, FormsModule],
@@ -10,20 +11,6 @@ import { sendUserToBackEnd } from '../../services/userService';
 })
 
 export class Inscription {
-  /**
-   * Regex for validating passwords:
-   * - Minimum 8 characters
-   * - At least 1 uppercase letter
-   * - At least 1 lowercase letter
-   * - At least 1 number
-   * - At least 1 special character
-   */
-  passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-  /**
-   * Regex for validating emails
-   */
-  emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   formData = {
     firstname: '',
@@ -74,13 +61,13 @@ export class Inscription {
     }
 
 
-    if (this.formData.email.trim().length <= 0 || !this.emailRegex.test(this.formData.email)) {
+    if (this.formData.email.trim().length <= 0 || !emailRegex.test(this.formData.email)) {
       this.errors.email = '* Email invalide.';
 
     }
 
 
-    if (!this.passwordRegex.test(this.formData.password)) {
+    if (!passwordRegex.test(this.formData.password)) {
       this.errors.password = '* Le mot de passe doit contenir 8 caracteres min, 1 maj, 1 min, 1 chiffre et 1 caractère spécial.';
     }
     if (this.formData.password !== this.formData.confirmPassword) {
