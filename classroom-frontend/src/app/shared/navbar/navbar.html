@@ -1,41 +1,60 @@
-
-
-
-
-<!-- // A modifier! -->
-<nav class="bg-purple-800 text-white pr-6 flex items-center justify-between">
-  <!-- desk -->
-  <ul class="hidden md:flex space-x-6">
-    <li><a routerLink="/" routerLinkActive="underline" class="">Accueil</a></li>
-    <li><a routerLink="/GestionAdmin" routerLinkActive="underline" class="">gestion</a></li>
-    <li><a routerLink="/stagiaires" routerLinkActive=" underline" class="">stagiaires</a></li>
-    <li><a routerLink="/modules" routerLinkActive=" underline" class="">module</a></li>
-    <li><a routerLink="/sessions" routerLinkActive="underline" class="">sessions</a></li>
-    <li><a routerLink="/contacte" routerLinkActive=" underline " class="">contact</a></li>
-    <li ><a routerLink="/inscription" routerLinkActive="underline" class="">inscription</a></li>
-    <li *ngIf=""><a routerLink="/connexion" routerLinkActive="underline" class="">connexion</a></li>
-  </ul>
-  <div class="flex items-center">
-    <img  src="/brand/Logo_violet.png"  alt="Logo" class="h-25 w-25 mx-[-6px] object-contain" />
-    <h2 class="text-xl font-bold">  Classroom</h2>
+<nav class="bg-purple-800 text-white px-6 py-4 flex items-center">
+  <!-- Logo -->
+  <div class="flex items-center space-x-2">
+    <img src="/brand/Logo_violet.png" alt="Logo" class="h-20 w-20 object-contain" />
+    <h2 class="text-xl font-bold">Classroom</h2>
   </div>
 
-  <!--  menu Bg  -->
-  
-  <button (click)="toggleMenu()" class="md:hidden focus:outline-none">
+  <!-- Liens + section utilisateur -->
+  <div class="flex items-center ml-6 flex-grow justify-between">
+    <!-- Liens nav desktop -->
+    <ul class="hidden md:flex space-x-6 items-center">
+      <li><a routerLink="/" routerLinkActive="underline">Accueil</a></li>
+      <li><a routerLink="/GestionAdmin" routerLinkActive="underline">Gestion</a></li>
+      <li><a routerLink="/stagiaires" routerLinkActive="underline">Stagiaires</a></li>
+      <li><a routerLink="/modules" routerLinkActive="underline">Module</a></li>
+      <li><a routerLink="/sessions" routerLinkActive="underline">Sessions</a></li>
+      <li><a routerLink="/contacte" routerLinkActive="underline">Contact</a></li>
+      <ng-container *ngIf="!user">
+        <li><a routerLink="/connexion" routerLinkActive="underline">Connexion</a></li>
+      </ng-container>
+    </ul>
+
+    <!-- Section utilisateur connecté -->
+    <div class="hidden md:flex items-center space-x-4">
+      <ng-container *ngIf="user">
+        <span class="font-medium">Bonjour, {{ user.firstname }}</span>
+        <button (click)="logout()" class="bg-purple-400 px-3 py-1 cursor-pointer rounded-lg hover:bg-purple-600">
+          Déconnexion
+        </button>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Mobile menu toggle -->
+  <button (click)="toggleMenu()" class="md:hidden ml-auto focus:outline-none">
     <img *ngIf="!menuOpen" src="/nav/icons8-menu-100.png" class="h-10 w-10" alt="menu icon">
-    <img  *ngIf="menuOpen" src="/nav/icons8-effacer-100.png" class="h-10 w-10"  alt="close icon">
+    <img *ngIf="menuOpen" src="/nav/icons8-effacer-100.png" class="h-10 w-10" alt="close icon">
   </button>
 </nav>
 
-<!-- Mob-->
-<ul *ngIf="menuOpen" class=" bg-purple-600 text-white md:hidden space-y-4 px-6 py-4">
-    <li class=""><a routerLink="/" routerLinkActive="underline" class=""> Accueil</a></li>
-    <li><a routerLink="/GestionAdmin" routerLinkActive="underline" class="">gestion</a></li>
-    <li><a routerLink="/stagiaires" routerLinkActive=" underline" class="">stagiaires</a></li>
-    <li><a routerLink="/modules" routerLinkActive=" underline" class="">module</a></li>
-    <li><a routerLink="/sessions" routerLinkActive="underline" class="">sessions</a></li>
-    <li><a routerLink="/contacte" routerLinkActive=" underline " class="">contact</a></li>
-    <li ><a routerLink="/inscription" routerLinkActive="underline" class="">inscription</a></li>
-    <li *ngIf=""><a routerLink="/connexion" routerLinkActive="underline" class="">connexion</a></li>
+<!-- Mobile Nav -->
+<ul *ngIf="menuOpen" class="bg-purple-600 text-white md:hidden space-y-4 px-6 py-4">
+  <li><a routerLink="/" routerLinkActive="underline">Accueil</a></li>
+  <li><a routerLink="/GestionAdmin" routerLinkActive="underline">Gestion</a></li>
+  <li><a routerLink="/stagiaires" routerLinkActive="underline">Stagiaires</a></li>
+  <li><a routerLink="/modules" routerLinkActive="underline">Module</a></li>
+  <li><a routerLink="/sessions" routerLinkActive="underline">Sessions</a></li>
+  <li><a routerLink="/contacte" routerLinkActive="underline">Contact</a></li>
+  <ng-container *ngIf="!user">
+    <li><a routerLink="/connexion" routerLinkActive="underline">Connexion</a></li>
+  </ng-container>
+  <ng-container *ngIf="user">
+    <li class="font-medium">Bonjour, {{ user.firstname }}</li>
+    <li>
+      <button (click)="logout()" class="bg-red-600 px-3 py-1 cursor-pointer rounded-lg hover:bg-purple-600">
+        Déconnexion
+      </button>
+    </li>
+  </ng-container>
 </ul>

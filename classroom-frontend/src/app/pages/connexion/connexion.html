@@ -1,0 +1,55 @@
+<div class="flex justify-center mt-16 bg-gray-100">
+  <div class="bg-white p-8 rounded-xl border-purple-200 border-2 shadow-purple w-full max-w-md mt-8 mb-46">
+
+    <div class="flex flex-col items-center border-b pb-2">
+      <h1 class="text-2xl font-bold text-purple-800">Connexion</h1>
+      <p class="text-center my-4 text-gray-600">Connectez-vous pour accéder à vos cours</p>
+    </div>
+
+    <form class="space-y-4" (ngSubmit)="onSubmit()">
+
+      <!-- email -->
+      <div class="flex flex-col mt-6">
+        <label class="font-medium">Email :</label>
+        <div class="flex mt-1">
+          <img src="/icones/icons8-email-100.png" class="h-8" alt="">
+          <input type="email" name="email" [(ngModel)]="formData.email"
+            class="p-1 w-full border-gray-400 border-b focus:border-b-2 border-purple-500 outline-none">
+        </div>
+        <p class="text-red-500 text-sm mt-1" *ngIf="errors.email">{{ errors.email }}</p>
+      </div>
+
+      <!-- mdp -->
+      <div class="flex flex-col mt-6">
+        <label class="font-medium">Mot de passe :</label>
+        <div class="flex mt-1 ml-[-10px]">
+          <img src="/icones/icons8-password-100.png" class="h-9" alt="">
+          <input type="password" name="password" [(ngModel)]="formData.password"
+            class="p-1 w-full border-gray-400 border-b focus:border-b-2 border-purple-500 outline-none">
+        </div>
+        <p class="text-red-500 text-sm mt-1" *ngIf="errors.password">{{ errors.password }}</p>
+      </div>
+
+  
+      <p *ngIf="errors.general" class="text-red-500 text-sm mt-2 text-center">
+        {{ errors.general }}
+      </p>
+
+    
+      <div>
+        <button type="submit"
+                [disabled]="loading"
+                class="bg-purple-700 text-white w-full p-2 mt-4 rounded-lg hover:bg-purple-800 transition disabled:opacity-50">
+          {{ loading ? 'Connexion...' : 'Se connecter' }}
+        </button>
+      </div>
+    </form>
+
+    <p class="text-center mt-4 text-gray-500">
+      Pas encore de compte ?
+      <a routerLink="/inscription" class="text-purple-700 underline ml-1 cursor-pointer">
+        Inscrivez-vous ici
+      </a>
+    </p>
+  </div>
+</div>

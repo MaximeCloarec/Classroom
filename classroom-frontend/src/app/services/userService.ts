@@ -1,13 +1,40 @@
 const BASE_URL = "http://localhost:3000/api/users/";
 
 /**
+ * Connexion utilisateur
+ * @param {Object} credentials { email, password }
+ * @returns {Promise<Object>} réponse du serveur
+ */
+export async function loginUser(credentials: { email: string; password: string }) {
+    try {
+        const response = await fetch(`${BASE_URL}login`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(credentials)
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || "Erreur de connexion");
+        }
+
+        return await response.json();
+
+    } catch (e) {
+        throw e;
+    }
+}
+
+/**
  * ajouter un utilisateur
  * @param {Object} userData
  * @returns {Promise<Object>} réponse du serveur
  */
 export async function sendUserToBackEnd(userData:any) {
     try {
-        const response = await fetch(`${BASE_URL}/register`, {
+        const response = await fetch(`${BASE_URL}register`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"

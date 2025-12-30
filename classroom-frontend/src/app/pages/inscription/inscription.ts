@@ -2,14 +2,18 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { sendUserToBackEnd } from '../../services/userService';
+import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-inscription',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './inscription.html',
   styleUrl: './inscription.css',
 })
 
 export class Inscription {
+    constructor(private router: Router) {} 
   /**
    * Regex for validating passwords:
    * - Minimum 8 characters
@@ -23,7 +27,7 @@ export class Inscription {
   /**
    * Regex for validating emails
    */
- emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   formData = {
     firstname: '',
@@ -42,7 +46,7 @@ export class Inscription {
     email: '',
     password: ''
   };
-  
+
   resetErrors() {
     this.errors = {
       firstname: '',
@@ -106,8 +110,9 @@ export class Inscription {
 
 
     try {
-           const response = await sendUserToBackEnd(this.formData);
-           console.log("reponse backend :", response);
+      const response = await sendUserToBackEnd(this.formData);
+      console.log("reponse backend :", response);
+      this.router.navigate(['/connexion']);
     } catch (e) {
       console.error("!! erreur API !!:", e);
     }
