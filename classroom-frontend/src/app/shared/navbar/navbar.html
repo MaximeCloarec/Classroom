@@ -1,41 +1,118 @@
+<!-- desktop -->
+<nav class="bg-white text-black flex flex-col items-center gap-2 px-6">
+  <ul class="sousTitre w-full hidden md:flex justify-between">
+    <li>
+      <a routerLink="/" routerLinkActive="underline" class="cursor-pointer hover:underline">
+        Accueil
+      </a>
+    </li>
 
+    <li>
+      <a routerLink="/contacte" routerLinkActive="underline" class="cursor-pointer hover:underline">
+        Compte
+      </a>
+    </li>
 
+    <li>
+      <a routerLink="/modules" routerLinkActive=" underline" class="cursor-pointer hover:underline">
+        Modules
+      </a>
+    </li>
 
+    <li>
+      <a routerLink="/stagiaires" routerLinkActive=" underline" class="cursor-pointer hover:underline">
+        Stagiaires
+      </a>
+    </li>
 
-<!-- // A modifier! -->
-<nav class="bg-purple-800 text-white pr-6 flex items-center justify-between">
-  <!-- desk -->
-  <ul class="hidden md:flex space-x-6">
-    <li><a routerLink="/" routerLinkActive="underline" class="">Accueil</a></li>
-    <li><a routerLink="/GestionAdmin" routerLinkActive="underline" class="">gestion</a></li>
-    <li><a routerLink="/stagiaires" routerLinkActive=" underline" class="">stagiaires</a></li>
-    <li><a routerLink="/modules" routerLinkActive=" underline" class="">module</a></li>
-    <li><a routerLink="/sessions" routerLinkActive="underline" class="">sessions</a></li>
-    <li><a routerLink="/contacte" routerLinkActive=" underline " class="">contact</a></li>
-    <li ><a routerLink="/inscription" routerLinkActive="underline" class="">inscription</a></li>
-    <li *ngIf=""><a routerLink="/connexion" routerLinkActive="underline" class="">connexion</a></li>
+    <li>
+      <a routerLink="/sessions" routerLinkActive="underline" class="cursor-pointer hover:underline">
+        Sessions
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/GestionAdmin" routerLinkActive="underline" class="cursor-pointer hover:underline">
+        Gestion
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/inscription" routerLinkActive="underline" class="cursor-pointer hover:underline">
+        Inscription
+      </a>
+    </li>
+
+    <li *ngIf="">
+      <a routerLink="/connexion" routerLinkActive="underline" class="">
+        Connexion
+      </a>
+    </li>
   </ul>
+
+  <div class="w-full h-1 items-center bg-black rounded-full"></div>
+
+
   <div class="flex items-center">
-    <img  src="/brand/Logo_violet.png"  alt="Logo" class="h-25 w-25 mx-[-6px] object-contain" />
-    <h2 class="text-xl font-bold">  Classroom</h2>
+    <h1 class="titre_module font-bold">Classroom</h1>
+    <img src="/brand/Logo_violet.png" alt="Logo" class="h-40 w-40 object-contain"/>
   </div>
 
-  <!--  menu Bg  -->
-  
-  <button (click)="toggleMenu()" class="md:hidden focus:outline-none">
-    <img *ngIf="!menuOpen" src="/nav/icons8-menu-100.png" class="h-10 w-10" alt="menu icon">
-    <img  *ngIf="menuOpen" src="/nav/icons8-effacer-100.png" class="h-10 w-10"  alt="close icon">
-  </button>
-</nav>
+<!--  Mobile  -->
 
-<!-- Mob-->
-<ul *ngIf="menuOpen" class=" bg-purple-600 text-white md:hidden space-y-4 px-6 py-4">
-    <li class=""><a routerLink="/" routerLinkActive="underline" class=""> Accueil</a></li>
-    <li><a routerLink="/GestionAdmin" routerLinkActive="underline" class="">gestion</a></li>
-    <li><a routerLink="/stagiaires" routerLinkActive=" underline" class="">stagiaires</a></li>
-    <li><a routerLink="/modules" routerLinkActive=" underline" class="">module</a></li>
-    <li><a routerLink="/sessions" routerLinkActive="underline" class="">sessions</a></li>
-    <li><a routerLink="/contacte" routerLinkActive=" underline " class="">contact</a></li>
-    <li ><a routerLink="/inscription" routerLinkActive="underline" class="">inscription</a></li>
-    <li *ngIf=""><a routerLink="/connexion" routerLinkActive="underline" class="">connexion</a></li>
+<!--  Btn burger  -->
+  <button (click)="toggleMenu()" class="md:hidden focus:outline-none">
+    <img *ngIf="!menuOpen" src="/nav/icons8-menu-100.png" class="h-10 w-10" alt="menu icon"/>
+    <img *ngIf="menuOpen" src="/nav/icons8-effacer-100.png" class="h-10 w-10" alt="close icon"/>
+  </button>
+
+</nav>
+  <ul *ngIf="menuOpen" class="sousTitre bg-purple-600 text-white md:hidden space-y-4 px-6 py-4">
+    <li class="">
+    <a routerLink="/" routerLinkActive="underline" class="cursor-pointer hover:underline">
+      Accueil
+    </a>
+  </li>
+
+  <li>
+    <a routerLink="/GestionAdmin" routerLinkActive="underline" class="cursor-pointer hover:underline">
+      gestion
+    </a>
+  </li>
+
+  <li>
+    <a routerLink="/stagiaires" routerLinkActive=" underline" class="cursor-pointer hover:underline">
+      stagiaires
+    </a>
+  </li>
+
+  <li>
+    <a routerLink="/modules" routerLinkActive=" underline" class="cursor-pointer hover:underline">
+      module
+    </a>
+  </li>
+
+  <li>
+    <a routerLink="/sessions" routerLinkActive="underline" class="cursor-pointer hover:underline">
+      sessions
+    </a>
+  </li>
+
+  <li>
+    <a routerLink="/contacte" routerLinkActive=" underline " class="cursor-pointer hover:underline">
+      contact
+    </a>
+  </li>
+
+  <li>
+    <a routerLink="/inscription" routerLinkActive="underline" class="cursor-pointer hover:underline">
+      inscription
+    </a>
+  </li>
+
+  <li *ngIf="">
+    <a routerLink="/connexion" routerLinkActive="underline" class="">
+      connexion
+    </a>
+  </li>
 </ul>
