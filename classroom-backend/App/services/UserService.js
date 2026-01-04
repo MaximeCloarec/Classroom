@@ -1,5 +1,5 @@
 const userRepository = require("../repository/UserRepository");
-const User = require("../Entities/user");
+const User = require("../Entities/User");
 const Admin = require("../Entities/Admin");
 const bcrypt = require("bcrypt");
 

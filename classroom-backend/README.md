@@ -164,6 +164,68 @@ On revois ici notre res avec un status et un message/information (ici l'objet us
 module.exports = new UserController();
 ```
 
+## API ENDPOINTS
+
+### GET :
+- Route : "/"
+- Renvoie l'ensemble des utilisateurs de la Base de donnée
+- Format d'envoie : `NULL`
+- Format de retour : `
+  {
+        "id_users": INT,
+        "firstname": "String",
+        "lastname": "String",
+        "pseudo": "String",
+        "email": "String",
+        "password": "String",
+        "profile_picture": "String"(Default: avatar/placeholderAvatar.png),
+        "status": Boolean (Default: True),
+        "name_role": "String" [User,Admin]
+    }`
+
+### POST : 
+- Route : "/register"
+- Permet d'enregistrer un utilisateur en base de donnée
+- Format d'envoie : `{ "firstname": "String",
+        "lastname": "String",
+        "pseudo": "String",
+        "email": "String",
+        "password": "String"}`
+- Format de retour : `{
+    "id_users": INT,
+    "firstname": "String",
+    "lastname": "String",
+    "pseudo": "String",
+    "email": "String",
+    "password": "HashedPassword",
+    "profile_picture": null,
+    "status": Boolean (Default: true),
+    "name_role": "String"(Default: Stagiaire)
+  }`
+
+- Route : "/login"
+- Permet de récupérer les informations d'un utilisateur en base de donnée
+- Format d'envoie : `{"email":"String",
+    "password":"String"}`
+- Format de retour : `{
+    "status": Boolean(Default: True),
+    "role": "String"(Default: Stagiaire),
+    "id_users": Int,
+    "firstname": "String",
+    "lastname": "String",
+    "pseudo": "String",
+    "email": "String",
+    "profile_picture": null,
+    "name_role": "stagiaire"
+}
+`
+
+## DELETE
+- Route : "/delete"
+- Permet de supprimer les informations d'un utilisateur en base de donnée
+- Format d'envoie : `{"emailSuppressor":"String",
+  "emailToDelete":"String"}`
+- Format de retour : `{ message: "Utilisateur supprimé avec succès" }`
 
 ## BONUS
 
